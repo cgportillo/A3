@@ -75,9 +75,15 @@ public class A3 {
                                 
                                 // if there are true indices for start and end of a name
                                 if (namesindex > -1 && endindex > -1) {
-                                	name = startindex.substring(namesindex, endindex);
-	                    			valuenameset.add(name);
-	                    			graph.put(keyname, valuenameset);
+                                	if(name == keyname) {
+                                		graph.put(keyname, null);
+                                		break;
+                                	}
+                                	else {
+	                                	name = startindex.substring(namesindex, endindex);
+		                    			valuenameset.add(name);
+		                    			graph.put(keyname, valuenameset);
+                                	}
                                 }
                     		}
                     	}
@@ -95,9 +101,15 @@ public class A3 {
                                 endindex = (startindex.indexOf(",", namesindex)) - 1;
                                
                                 if (namesindex > -1 && endindex > -1) {
-	                            	name = startindex.substring(namesindex, endindex);
-	                    			existingvalues.add(name);
-	    	                        graph.put(keyname, existingvalues);
+                                	if(name == keyname) {
+                                		graph.put(keyname, null);
+                                		break;
+                                	}
+                                	else {
+		                            	name = startindex.substring(namesindex, endindex);
+		                    			existingvalues.add(name);
+		    	                        graph.put(keyname, existingvalues);
+                                	}
                                 }
                     		}
                     	}
@@ -138,32 +150,27 @@ public class A3 {
     	while(!queue.isEmpty()) {
     		
     		String next = queue.remove();
-    		System.out.println(next);
     		
     		Set<String> list = neighbors(next, graph);
-    		System.out.println("Neighbors of " + next + " : " + list);
+    		visited.add(next);
 			Iterator<String> listit = list.iterator();
-			
-			if (visited.contains(actor2)) {
-//				visited.add(next);
+		
+			if (list.contains(actor2)) {
 				path.put(actor1, next);
 				break;
 			}
 			
 			else {
 				while(listit.hasNext()) {
-					current = listit.next();
-//					System.out.println(current);
-					
-					if (!visited.contains(actor2)) {
-	    				visited.add(current);
-	    				queue.add(current);
-	    				path.put(actor1, current);
-	    			}
+					if(!visited.contains(actor2)) {
+						current = listit.next();					
+						queue.add(current);
+						visited.add(current);
+					}
 				}
 			}
     	}
-    	System.out.println("Path between " + actor1 + " and " + actor2 + " : " + actor1 + path.get(actor1) + actor2);
+    	System.out.println("Path between " + actor1 + " and " + actor2 + ": " + actor1 + path.get(actor1));
     }
     
     public Set<String> neighbors(String neighbs, HashMap<String, HashSet<String>> graph) {
