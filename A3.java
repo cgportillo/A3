@@ -81,10 +81,12 @@ public class A3 {
 			System.out.println("Choose actor 1: ");
 			String actor1 = scans.nextLine();
 			actor1 = actor1.toLowerCase();
+			System.out.println(graph.get(actor1));
 			
 			System.out.println("Choose actor 2: ");
 			String actor2 = scans.nextLine();
 			actor2 = actor2.toLowerCase();
+			System.out.println(graph.get(actor2));
 
 			reader.close();
 			scans.close();
