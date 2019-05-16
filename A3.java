@@ -162,15 +162,11 @@ public class A3 {
 					// print path table, generate path from path table
 					if (coactor.equals(actor2)) {
 						path.put(actor2, coactor);
-						System.out.println("Shortest path between " + actor1 + " to " + actor2 + ": ");
-						String s = path.get(actor1) ;
-						while (!s.equals(actor1)){
-							System.out.println(s);
-							s = path.get(s);							
-						} 
+						System.out.println("Shortest path between " + actor1 + " to " + actor2 + ": "); 
+						System.out.println(path.get(actor2));
 						return path.get(actor2);
 					}
-					// need to try and print back. 
+					// need to try and print back. right now, it prints the last person it added.
 				}
 			}
 		}
